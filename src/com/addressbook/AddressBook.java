@@ -10,6 +10,7 @@ public class AddressBook {
 	static List<Contacts> addressBook;
 
 	public static void main(String[] args) {
+
 		addressBook = new LinkedList<Contacts>();
 		boolean isExit = false;
 
@@ -18,11 +19,14 @@ public class AddressBook {
 
 		while (!isExit) {
 			System.out.println("Select the option from below");
+
 			if (addressBook.isEmpty()) {
-				System.out.println("1. Add Contact" + "\n5. Exit");
+
+				System.out.println("1. Add Contact" + "\n6. Exit");
 			} else {
-				System.out
-						.println("1. Add Contact" + "\n2. Display Contact\n3. Edit Contact\n4.Delete Contact\n 5.Exit");
+
+				System.out.println("1. Add Contact"
+						+ "\n2. Display Contact\n3. Edit Contact\n4.Delete Contact\n5.Search(By City)\n 6.Exit");
 			}
 
 			String option = scanner.nextLine();
@@ -45,6 +49,9 @@ public class AddressBook {
 				break;
 
 			case "5":
+				searchCity(scanner);
+				break;
+			case "6":
 				isExit = true;
 				showContacts();
 				break;
@@ -259,5 +266,12 @@ public class AddressBook {
 		} else {
 			System.out.println(deleteContact.getFirstname() + "'s contact has been removed from your Address Book.");
 		}
+	}
+
+	private static void searchCity(Scanner scanner) {
+		System.out.println("Search the name by using City");
+		String city = scanner.nextLine();
+
+		addressBook.stream().filter(contacts -> contacts.getCity().equalsIgnoreCase(city)).forEach(System.out::println);
 	}
 }
